@@ -1,6 +1,8 @@
+import logging
+
 from cryptography.hazmat.primitives.asymmetric import rsa, padding
 from cryptography.hazmat.primitives import hashes
-import logging
+
 
 logger = logging.getLogger()
 logger.setLevel('INFO')
