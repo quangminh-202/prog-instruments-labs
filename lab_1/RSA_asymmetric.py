@@ -24,12 +24,25 @@ class RSA:
         return private_key, public_key
 
     def encrypt_rsa(self, public_key, text: bytes) -> bytes:
-        encrypt_text = public_key.encrypt(text, padding.OAEP(mgf=padding.MGF1(algorithm=hashes.SHA256()),
-                                                       algorithm=hashes.SHA256(), label=None))
-        logging.info('The text is encrypted with an asymmetric encryption algorithm.')
+        encrypt_text = public_key.encrypt(
+            text,
+            padding.OAEP(
+                mgf=padding.MGF1(algorithm=hashes.SHA256()),
+                algorithm=hashes.SHA256(),
+                label=None
+            )
+        )
+        logging.info('The text is encrypted.')
         return encrypt_text
 
     def decrypt_rsa(self, private_key, text):
-        decrypt_text = private_key.decrypt(text, padding.OAEP(mgf=padding.MGF1(algorithm=hashes.SHA256()),algorithm=hashes.SHA256(), label=None))
-        logging.info('The text encrypted with the asymmetric encryption algorithm has been decrypted.')
+        decrypt_text = private_key.decrypt(
+            text,
+            padding.OAEP(
+                mgf=padding.MGF1(algorithm=hashes.SHA256()),
+                algorithm=hashes.SHA256(),
+                label=None
+            )
+        )
+        logging.info('The text encrypted has been decrypted.')
         return decrypt_text

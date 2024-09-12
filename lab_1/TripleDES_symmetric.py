@@ -12,13 +12,21 @@ class TripleDES:
     def encrypt_3des(self, key:bytes, plaintext:bytes) -> bytes:
         padder = padding.PKCS7(algorithms.TripleDES.block_size).padder()
         padded_plaintext = padder.update(plaintext) + padder.finalize()
-        cipher = Cipher(algorithms.TripleDES(key), modes.ECB(), backend=default_backend())
+        cipher = Cipher(
+            algorithms.TripleDES(key),
+            modes.ECB(),
+            backend=default_backend()
+        )
         encryptor = cipher.encryptor()
         ciphertext = encryptor.update(padded_plaintext) + encryptor.finalize()
         return ciphertext
 
     def decrypt_3des(self, key, ciphertext):
-        cipher = Cipher(algorithms.TripleDES(key), modes.ECB(), backend=default_backend())
+        cipher = Cipher(
+            algorithms.TripleDES(key),
+            modes.ECB(),
+            backend=default_backend()
+        )
         decryptor = cipher.decryptor()
         padded_plaintext = decryptor.update(ciphertext)+ decryptor.finalize()
         unpadder = padding.PKCS7(algorithms.TripleDES.block_size).unpadder()
@@ -28,11 +36,11 @@ class TripleDES:
     def ask_user_length_key(self) -> int:
         while True:
             try:
-                length = int(input("Enter your 3DES key length (64, 128, or 192): "))
+                length = int(input("Enter key length (64, 128, or 192): "))
                 if length in [64, 128, 192]:
                     return length
                 else:
-                    raise ValueError("Invalid key length. Please enter 64, 128, or 192.")
+                    raise ValueError("Please enter 64, 128, or 192.")
             except ValueError as e:
                 print("Invalid input.")
 

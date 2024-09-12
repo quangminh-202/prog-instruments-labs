@@ -38,15 +38,21 @@ def load_symmetric_key(filename):
 def write_asymmetric_key(private_key, public_key, private_pem, public_pem):
     try:
         with open(public_pem, 'wb') as public_out:
-            public_out.write(public_key.public_bytes(encoding=serialization.Encoding.PEM,
-                                                     format=serialization.PublicFormat.SubjectPublicKeyInfo))
-        logging.info(f'The public key has been successfully saved to a file{public_pem}')
+            public_bytes = public_key.public_bytes(
+                encoding=serialization.Encoding.PEM,
+                format=serialization.PublicFormat.SubjectPublicKeyInfo
+            )
+            public_out.write(public_bytes)
+        logging.info(f'The public key successfully {public_pem}')
 
         with open(private_pem, 'wb') as private_out:
-            private_out.write(private_key.private_bytes(encoding=serialization.Encoding.PEM,
-                                                        format=serialization.PrivateFormat.TraditionalOpenSSL,
-                                                        encryption_algorithm=serialization.NoEncryption()))
-        logging.info(f'The private key has been successfully saved to a file {private_pem}')
+            private_bytes=private_key.private_bytes(
+                encoding=serialization.Encoding.PEM,
+                format=serialization.PrivateFormat.TraditionalOpenSSL,
+                encryption_algorithm=serialization.NoEncryption()
+            )
+            private_out.write(private_bytes)
+        logging.info(f'The private key successfully {private_pem}')
     except Exception as e:
         logging.error(f'Error writing asymmetric keys to files: {e}')
 
