@@ -1,7 +1,9 @@
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.serialization import load_pem_private_key
+
 import logging
 import json
+
 
 def load_settings(setting_file):
     settings = None
@@ -13,6 +15,7 @@ def load_settings(setting_file):
         logging.error(f'Error reading setttings file: {e}')
     return settings
 
+
 def write_symmetric_key(key, filename):
     try:
         with open(filename, 'wb') as f:
@@ -20,6 +23,7 @@ def write_symmetric_key(key, filename):
         logging.info(f' The symmetric key is written in the file{filename}')
     except Exception as e:
         logging.error(f'Error writing symmetric key to file: {e}')
+
 
 def load_symmetric_key(filename):
     try:
@@ -29,6 +33,7 @@ def load_symmetric_key(filename):
     except Exception as e:
         logging.error(f'Error reading symmetric key file: {e}')
     return content
+
 
 def write_asymmetric_key(private_key, public_key, private_pem, public_pem):
     try:
@@ -56,6 +61,7 @@ def load_private_key(filename):
     except Exception as e:
         logging.error(f'Error reading private key file: {e}')
 
+
 def load_text(filename):
     try:
         with open(filename, mode='rb') as f:
@@ -64,6 +70,7 @@ def load_text(filename):
         return text
     except Exception as e:
         logging.error(f'Error reading text file {e}')
+
 
 def write_file(filename: str, text: bytes) -> None:
     try:
