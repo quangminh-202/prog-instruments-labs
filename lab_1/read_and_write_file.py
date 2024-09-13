@@ -6,6 +6,15 @@ from cryptography.hazmat.primitives.serialization import load_pem_private_key
 
 
 def load_settings(setting_file: str) -> dict:
+    """
+   Load settings from a JSON file.
+   Parameters:
+       setting_file (str): Path to the JSON file containing settings.
+   Returns:
+       dict: A dictionary containing settings loaded from the JSON file.
+   Raises:
+       OSError: If there is an error reading the settings file.
+   """
     settings = None
     try:
         with open(setting_file) as f:
@@ -17,6 +26,12 @@ def load_settings(setting_file: str) -> dict:
 
 
 def write_symmetric_key(key: bytes, filename: str) -> None:
+    """
+    Write a symmetric key to a file.
+    Parameters:
+        key (bytes): The symmetric key to write.
+        filename (str): The name of the file to write the key to.
+    """
     try:
         with open(filename, "wb") as f:
             f.write(key)
@@ -26,6 +41,13 @@ def write_symmetric_key(key: bytes, filename: str) -> None:
 
 
 def load_symmetric_key(filename: str) -> bytes:
+    """
+    Load a symmetric key from a file.
+    Parameters:
+        filename (str): The name of the file containing the symmetric key.
+    Returns:
+        bytes: The loaded symmetric key.
+    """
     try:
         with open(filename, mode="rb") as f:
             content = f.read()
@@ -41,6 +63,14 @@ def write_asymmetric_key(
         private_pem: str,
         public_pem: str
 ) -> None:
+    """
+    Write an asymmetric key pair to files.
+    Parameters:
+        private_key: The private key to write.
+        public_key: The public key to write.
+        private_pem (str): The name of the file to write the private key to.
+        public_pem (str): The name of the file to write the public key to.
+    """
     try:
         with open(public_pem, "wb") as public_out:
             public_bytes = public_key.public_bytes(
@@ -63,6 +93,13 @@ def write_asymmetric_key(
 
 
 def load_private_key(filename: str) -> bytes:
+    """
+    Load a private key from a file.
+    Parameters:
+        filename (str): The name of the file containing the private key.
+    Returns:
+        bytes: The loaded private key.
+    """
     try:
         with open(filename, mode="rb") as f:
             private_bytes = f.read()
@@ -74,6 +111,13 @@ def load_private_key(filename: str) -> bytes:
 
 
 def load_text(filename: str) -> bytes:
+    """
+    Load text from a file.
+    Parameters:
+        filename (str): The name of the file containing the text.
+    Returns:
+        bytes: The loaded text.
+    """
     try:
         with open(filename, mode="rb") as f:
             text = f.read()
@@ -84,6 +128,12 @@ def load_text(filename: str) -> bytes:
 
 
 def write_file(filename: str, text: bytes) -> None:
+    """
+    Write text to a file.
+    Parameters:
+        filename (str): The name of the file to write the text to.
+        text (bytes): The text to write.
+    """
     try:
         with open(filename, mode="wb") as f:
             f.write(text)
