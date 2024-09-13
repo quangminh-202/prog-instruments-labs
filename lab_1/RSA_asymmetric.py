@@ -5,7 +5,7 @@ from cryptography.hazmat.primitives import hashes
 
 
 logger = logging.getLogger()
-logger.setLevel('INFO')
+logger.setLevel("INFO")
 
 
 class RSA:
@@ -20,7 +20,7 @@ class RSA:
         )
         private_key = keys
         public_key = keys.public_key()
-        logging.info('Asymmetric encryption keys have been generated.')
+        logging.info("Asymmetric encryption keys have been generated.")
         return private_key, public_key
 
     def encrypt_rsa(self, public_key, text: bytes) -> bytes:
@@ -32,7 +32,7 @@ class RSA:
                 label=None
             )
         )
-        logging.info('The text is encrypted.')
+        logging.info("The text is encrypted.")
         return encrypt_text
 
     def decrypt_rsa(self, private_key, text):
@@ -44,5 +44,5 @@ class RSA:
                 label=None
             )
         )
-        logging.info('The text encrypted has been decrypted.')
+        logging.info("The text encrypted has been decrypted.")
         return decrypt_text
