@@ -6,10 +6,10 @@ from cryptography.hazmat.primitives import padding
 
 
 class TripleDES:
-    def __init__(self, symmetric_key_path:str):
+    def __init__(self, symmetric_key_path: str) -> None:
         self.symmetric_key = symmetric_key_path
 
-    def encrypt_3des(self, key:bytes, plaintext:bytes) -> bytes:
+    def encrypt_3des(self, key: bytes, plaintext: bytes) -> bytes:
         padder = padding.PKCS7(algorithms.TripleDES.block_size).padder()
         padded_plaintext = padder.update(plaintext) + padder.finalize()
         cipher = Cipher(
@@ -21,7 +21,7 @@ class TripleDES:
         ciphertext = encryptor.update(padded_plaintext) + encryptor.finalize()
         return ciphertext
 
-    def decrypt_3des(self, key, ciphertext):
+    def decrypt_3des(self, key: bytes, ciphertext: bytes) -> bytes:
         cipher = Cipher(
             algorithms.TripleDES(key),
             modes.ECB(),
@@ -44,5 +44,5 @@ class TripleDES:
             except ValueError as e:
                 print("Invalid input.")
 
-    def generate_3des_key(self, length):
+    def generate_3des_key(self, length: int) -> bytes:
         return os.urandom(length//8)

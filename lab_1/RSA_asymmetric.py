@@ -9,7 +9,7 @@ logger.setLevel("INFO")
 
 
 class RSA:
-    def __init__(self, private_key_path, public_key_path):
+    def __init__(self, private_key_path: str, public_key_path: str) -> None:
         self.private_key = private_key_path
         self.public_key = public_key_path
 
@@ -23,7 +23,7 @@ class RSA:
         logging.info("Asymmetric encryption keys have been generated.")
         return private_key, public_key
 
-    def encrypt_rsa(self, public_key, text: bytes) -> bytes:
+    def encrypt_rsa(self, public_key: rsa.RSAPublicKey, text: bytes) -> bytes:
         encrypt_text = public_key.encrypt(
             text,
             padding.OAEP(
@@ -35,7 +35,7 @@ class RSA:
         logging.info("The text is encrypted.")
         return encrypt_text
 
-    def decrypt_rsa(self, private_key, text):
+    def decrypt_rsa(self, private_key: rsa.RSAPrivateKey, text: str) -> bytes:
         decrypt_text = private_key.decrypt(
             text,
             padding.OAEP(
