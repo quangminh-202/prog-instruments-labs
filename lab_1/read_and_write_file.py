@@ -5,7 +5,7 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.serialization import load_pem_private_key
 
 
-def load_settings(setting_file):
+def load_settings(setting_file: str) -> dict:
     settings = None
     try:
         with open(setting_file) as f:
@@ -16,7 +16,7 @@ def load_settings(setting_file):
     return settings
 
 
-def write_symmetric_key(key, filename):
+def write_symmetric_key(key: bytes, filename: str) -> None:
     try:
         with open(filename, "wb") as f:
             f.write(key)
@@ -25,7 +25,7 @@ def write_symmetric_key(key, filename):
         logging.error(f"Error writing symmetric key to file: {e}")
 
 
-def load_symmetric_key(filename):
+def load_symmetric_key(filename: str) -> bytes:
     try:
         with open(filename, mode="rb") as f:
             content = f.read()
@@ -35,7 +35,12 @@ def load_symmetric_key(filename):
     return content
 
 
-def write_asymmetric_key(private_key, public_key, private_pem, public_pem):
+def write_asymmetric_key(
+        private_key: rsa.RSAPrivateKey,
+        public_key: rsa.RSAPublicKey,
+        private_pem: str,
+        public_pem: str
+) -> None:
     try:
         with open(public_pem, "wb") as public_out:
             public_bytes = public_key.public_bytes(
@@ -57,7 +62,7 @@ def write_asymmetric_key(private_key, public_key, private_pem, public_pem):
         logging.error(f"Error writing asymmetric keys to files: {e}")
 
 
-def load_private_key(filename):
+def load_private_key(filename: str) -> bytes:
     try:
         with open(filename, mode="rb") as f:
             private_bytes = f.read()
@@ -68,7 +73,7 @@ def load_private_key(filename):
         logging.error(f"Error reading private key file: {e}")
 
 
-def load_text(filename):
+def load_text(filename: str) -> bytes:
     try:
         with open(filename, mode="rb") as f:
             text = f.read()
