@@ -20,7 +20,7 @@ def write_symmetric_key(key, filename):
     try:
         with open(filename, "wb") as f:
             f.write(key)
-        logging.info(f" The symmetric key is written in the file{filename}")
+        logging.info(f"The symmetric key is written in the file {filename}")
     except Exception as e:
         logging.error(f"Error writing symmetric key to file: {e}")
 
@@ -46,7 +46,7 @@ def write_asymmetric_key(private_key, public_key, private_pem, public_pem):
         logging.info(f"The public key successfully {public_pem}")
 
         with open(private_pem, "wb") as private_out:
-            private_bytes=private_key.private_bytes(
+            private_bytes = private_key.private_bytes(
                 encoding=serialization.Encoding.PEM,
                 format=serialization.PrivateFormat.TraditionalOpenSSL,
                 encryption_algorithm=serialization.NoEncryption()
@@ -82,6 +82,6 @@ def write_file(filename: str, text: bytes) -> None:
     try:
         with open(filename, mode="wb") as f:
             f.write(text)
-        logging.info(f" The text is written to a file {filename}")
+        logging.info(f"The text is written to a file {filename}")
     except Exception as e:
         logging.error(f"Error writing text to file: {e}")
